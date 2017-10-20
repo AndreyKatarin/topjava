@@ -34,7 +34,7 @@ public class UserMealsUtil {
 
 
         if (mealList == null || startTime == null || endTime == null)
-            return null; // Maybe throw a custom exception instead null?
+            return null; // Maybe throw a custom exception instead of null
 
         Map<LocalDate, Integer> userMealMapPerDay = new HashMap<>();
 
