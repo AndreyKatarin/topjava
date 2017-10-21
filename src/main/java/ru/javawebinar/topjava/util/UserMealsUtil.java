@@ -38,13 +38,9 @@ public class UserMealsUtil {
 
         Map<LocalDate, Integer> userMealMapPerDay = new HashMap<>();
 
-
-        mealList.stream().forEach(
+        mealList.forEach(
                 (entry) ->  {
-                    if (userMealMapPerDay.containsKey(entry.getDateTime().toLocalDate()))
-                        userMealMapPerDay.put(entry.getDateTime().toLocalDate(), userMealMapPerDay.get(entry.getDateTime().toLocalDate()) + entry.getCalories());
-                    else
-                        userMealMapPerDay.put(entry.getDateTime().toLocalDate(), entry.getCalories());
+                    userMealMapPerDay.put(entry.getDateTime().toLocalDate(), entry.getCalories() + userMealMapPerDay.getOrDefault(entry.getDateTime().toLocalDate(), 0));
                 }
         );
 
