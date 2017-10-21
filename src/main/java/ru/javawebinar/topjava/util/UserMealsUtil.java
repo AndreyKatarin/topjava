@@ -33,14 +33,9 @@ public class UserMealsUtil {
         if (mealList == null || startTime == null || endTime == null)
             return null; // Maybe throw a custom exception instead of null
 
-        Map<LocalDate, Integer> userMealMapPerDay = new HashMap<>();
-
-        mealList.forEach(
-                (entry) -> {
-                    userMealMapPerDay.put(entry.getDateTime().toLocalDate(), entry.getCalories() +
-                            userMealMapPerDay.getOrDefault(entry.getDateTime().toLocalDate(), 0));
-                }
-        );
+        Map<LocalDate, Integer> userMealMapPerDay = mealList.stream().collect(
+                Collectors.toMap((UserMeal entry) -> entry.getDateTime().toLocalDate(),
+                        UserMeal::getCalories, (oldEntry, newEntry) -> oldEntry + newEntry));
 
         return mealList.stream().filter((entry) -> TimeUtil.isBetween(entry.getDateTime().toLocalTime(), startTime, endTime))
                 .map(
