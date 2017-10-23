@@ -31,11 +31,11 @@ public class UserMealsUtil {
                                                                    LocalTime endTime, int caloriesPerDay) {
 
         if (mealList == null || startTime == null || endTime == null)
-            return null; // Maybe throw a custom exception instead of null
+            return new ArrayList<>();
 
         Map<LocalDate, Integer> userMealMapPerDay = mealList.stream().collect(
                 Collectors.toMap((UserMeal entry) -> entry.getDateTime().toLocalDate(),
-                        UserMeal::getCalories, (oldEntry, newEntry) -> oldEntry + newEntry));
+                        UserMeal::getCalories, Integer::sum));
 
         return mealList.stream().filter((entry) -> TimeUtil.isBetween(entry.getDateTime().toLocalTime(), startTime, endTime))
                 .map(
