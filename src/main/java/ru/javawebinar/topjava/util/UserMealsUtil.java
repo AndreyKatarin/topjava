@@ -27,6 +27,33 @@ public class UserMealsUtil {
         getFilteredWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
     }
 
+    public static List<UserMealWithExceed> getFilteredWithExceededByLoop(List<UserMeal> mealList, LocalTime startTime,
+                                                                   LocalTime endTime, int caloriesPerDay) {
+        if (mealList == null || startTime == null || endTime == null)
+            return new ArrayList<>();
+
+        Map<LocalDate, Integer> userMealMapPerDay = new HashMap<>();
+        List<UserMealWithExceed> userMealWithExceedList = new ArrayList<>();
+
+        for (UserMeal userMeal: mealList) {
+            userMealMapPerDay.put(userMeal.getDateTime().toLocalDate(), userMeal.getCalories() +
+                    userMealMapPerDay.getOrDefault(userMeal.getDateTime().toLocalDate(), 0));
+        }
+
+        for (UserMeal userMeal: mealList) {
+            if (TimeUtil.isBetween(userMeal.getDateTime().toLocalTime(), startTime, endTime))
+                userMealWithExceedList.add(
+                        new UserMealWithExceed(
+                                userMeal.getDateTime(),
+                                userMeal.getDescription(),
+                                userMeal.getCalories(),
+                                userMealMapPerDay.get(userMeal.getDateTime().toLocalDate()) > caloriesPerDay
+                        )
+                );
+        }
+        return userMealWithExceedList;
+    }
+
     public static List<UserMealWithExceed> getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime,
                                                                    LocalTime endTime, int caloriesPerDay) {
 
