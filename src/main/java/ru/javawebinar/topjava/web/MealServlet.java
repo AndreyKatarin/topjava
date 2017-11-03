@@ -43,16 +43,6 @@ public class MealServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        log.debug("create List of meals");
-        List<Meal> meals = Arrays.asList(
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
-        );
-
         String page = null;
 
         CommandFactory commandFactory = new CommandFactory();
@@ -61,15 +51,18 @@ public class MealServlet extends HttpServlet {
         page = command.execute(request);
 
         if (page != null) {
+            switch (page) {
+                case "deleted": { // this is to clear request when delete....
+                    response.sendRedirect("/meals");
+                    return;
+                }
+            }
+            log.debug("Forward to " + page);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
 
+            dispatcher.forward(request, response);
         } else {
-
+            response.sendRedirect("/meals");
         }
-
-
-
-        log.debug("forward to meals.jsp");
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/meals.jsp");
-        dispatcher.forward(request, response);
     }
 }

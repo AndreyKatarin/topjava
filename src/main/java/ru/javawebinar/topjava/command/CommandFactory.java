@@ -1,11 +1,15 @@
 package ru.javawebinar.topjava.command;
 
+import org.slf4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by admin on 03.11.2017.
- */
+import static org.slf4j.LoggerFactory.getLogger;
+
+
 public class CommandFactory {
+
+    private static final Logger log = getLogger(CommandFactory.class);
 
     public ActionCommand defineCommand(HttpServletRequest request) {
         ActionCommand current = new IndexCommand();
@@ -17,12 +21,14 @@ public class CommandFactory {
         }
 
         try {
-            CommandEnum currentEnum = CommandEnum.valueOf(request.getParameter("command"));
+            CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch(IllegalArgumentException e) {
             request.setAttribute("wrongCommand", action + " не поддерживается!");
+            log.error("negative argument: ", e);
         }
 
+        log.info("Current command is " + action);
         return current;
     }
 }
