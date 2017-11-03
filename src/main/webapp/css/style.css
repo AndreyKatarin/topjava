@@ -1,0 +1,20 @@
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    height: 50px;
+    padding: 15px;
+}
+
+.calories_under_limit {
+    background-color: #DEF3CA;
+}
+
+.calories_over_limit {
+    background-color: #FFB9B9;
+}
