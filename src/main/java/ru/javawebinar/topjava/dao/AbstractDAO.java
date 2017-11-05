@@ -9,5 +9,5 @@ public abstract class AbstractDAO<E, K> {
     public abstract E getEntityByID(K id);
     public abstract void insert(E entity);
     public abstract void update(E entity);
-    public abstract void delete(E entity);
+    public abstract void delete(K id);
 }

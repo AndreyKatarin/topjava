@@ -11,7 +11,7 @@
 </head>
 <body>
 <h3><a href="${pageContext.request.contextPath}/index.html">Home</a></h3>
-<h3><a href="${pageContext.request.contextPath}/jsps/addMeal.jsp">Добавить приём пищи</a></h3>
+<h3><a href="${pageContext.request.contextPath}/meals?command=showCreateForm">Добавить приём пищи</a></h3>
 <h2>Приём пищи</h2>
 <table>
     <thead>
@@ -27,8 +27,8 @@
             <td>${meal.getCalories()}</td>
             <td><javatime:format value="${meal.getDateTime()}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
             <td>
-                <a href="/meals?command=update_form&id=${meal.getId()}">Редактировать</a> |
-                <a href="/meals?command=delete_meal&id=${meal.getId()}">Удалить</a>
+                <a href="${pageContext.request.contextPath}/meals?command=updateForm&id=${meal.getId()}">Редактировать</a> |
+                <a href="${pageContext.request.contextPath}/meals?command=deleteMeal&id=${meal.getId()}">Удалить</a>
             </td>
         </tr>
     </c:forEach>
