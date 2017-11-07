@@ -29,35 +29,37 @@ public class MealServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
-
         String command = request.getParameter("command");
 
         if (command == null || command.isEmpty()) {
             listMeal(request, response);
         } else if ("insertMeal".equals(command)) {
             insertMeal(request, response);
-        } else if ("deleteMeal".equals(command)) {
-            deleteMeal(request, response);
-        } else if ("showCreateForm".equals(command)) {
-            showCreateForm(request, response);
-        } else if ("updateForm".equals(command)) {
-            showUpdateForm(request, response);
         } else if ("updateMeal".equals(command)) {
             updateMeal(request, response);
         } else {
             listMeal(request, response);
         }
     }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String command = request.getParameter("command");
+
+        if (command == null || command.isEmpty()) {
+            listMeal(request, response);
+        } else if ("deleteMeal".equals(command)) {
+            deleteMeal(request, response);
+        } else if ("showCreateForm".equals(command)) {
+            showCreateForm(request, response);
+        } else if ("updateForm".equals(command)) {
+            showUpdateForm(request, response);
+        } else {
+            listMeal(request, response);
+        }
+    }
+
 
     private void listMeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("meals", MealsUtil.getFilteredWithExceeded(mealDAO.getAll(), LocalTime.MIN, LocalTime.MAX, 2000));
@@ -72,7 +74,7 @@ public class MealServlet extends HttpServlet {
             int calories = Integer.parseInt(request.getParameter("caloriesNumber"));
             logger.debug("inserted new Meal object");
             mealDAO.insert(new Meal(mealDAO.generateId(), localDateTime, description, calories));
-            response.sendRedirect("/meals");
+            response.sendRedirect(request.getContextPath() + "/meals");
         } catch (NumberFormatException e) {
             logger.error("negative argument - calories: ", e);
             request.setAttribute("caloriesNotNumberError", "В поле калории должно быть число");
@@ -93,7 +95,7 @@ public class MealServlet extends HttpServlet {
             dispatcher.forward(request, response);
         } catch (NumberFormatException e) {
             logger.error("negative argument - id: ", e);
-            response.sendRedirect("/meals");
+            response.sendRedirect(request.getContextPath() + "/meals");
         }
     }
 
@@ -111,7 +113,7 @@ public class MealServlet extends HttpServlet {
             showUpdateForm(request, response);
         }
 
-        response.sendRedirect("/meals");
+        response.sendRedirect(request.getContextPath() + "/meals");
     }
 
     private void deleteMeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -123,6 +125,6 @@ public class MealServlet extends HttpServlet {
             logger.error("negative argument - id: ", e);
         }
 
-        response.sendRedirect("/meals");
+        response.sendRedirect(request.getContextPath() + "/meals");
     }
 }
