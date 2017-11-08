@@ -13,4 +13,9 @@ public final class DateUtil {
 
         return LocalDateTime.parse(str, formatter);
     }
+
+    public static String parseLocalDateTime(LocalDateTime date, String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return date.format(formatter);
+    }
 }

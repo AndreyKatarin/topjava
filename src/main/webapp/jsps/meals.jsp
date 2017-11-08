@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://sargue.net/jsptags/time" prefix="javatime" %>
+<%@ taglib uri="/WEB-INF/tld/custom.tld" prefix="ctg" %>
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,7 @@
         <tr class="${meal.isExceed() ? 'calories_over_limit' : 'calories_under_limit'}">
             <td>${meal.getDescription()}</td>
             <td>${meal.getCalories()}</td>
-            <td><javatime:format value="${meal.getDateTime()}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
+            <td><ctg:format value="${meal.getDateTime()}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
             <td>
                 <a href="${pageContext.request.contextPath}/meals?command=updateForm&id=${meal.getId()}">Редактировать</a> |
                 <a href="${pageContext.request.contextPath}/meals?command=deleteMeal&id=${meal.getId()}">Удалить</a>
@@ -34,5 +35,6 @@
     </c:forEach>
     </tbody>
 </table>
+
 </body>
 </html>
