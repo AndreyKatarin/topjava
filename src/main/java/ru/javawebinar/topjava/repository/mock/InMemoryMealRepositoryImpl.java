@@ -16,7 +16,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
-        MealsUtil.MEALS.forEach(m -> save(m, 2));
+        MealsUtil.MEALS.forEach(m -> save(m, 1));
     }
 
     @Override
@@ -25,8 +25,8 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
 
         if (meal.isNew()) {
             meal.setId(counter.incrementAndGet());
-            meal.setUserId(userId);
         }
+        meal.setUserId(userId);
         Map<Integer, Meal> meals = repository.computeIfAbsent(userId, m -> new ConcurrentHashMap<>());
         meals.put(meal.getId(), meal);
         return meal;
@@ -48,7 +48,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     public Collection<Meal> getAll(int userId) {
         Map<Integer, Meal> map = repository.get(userId);
 
-        return map == null ? Collections.EMPTY_LIST : map.values().stream().sorted((m1, m2) -> m1.getDateTime().compareTo(m2.getDateTime())).collect(Collectors.toList());
+        return map == null ? Collections.EMPTY_LIST : map.values().stream().sorted((m1, m2) -> m2.getDateTime().compareTo(m1.getDateTime())).collect(Collectors.toList());
     }
 }
 

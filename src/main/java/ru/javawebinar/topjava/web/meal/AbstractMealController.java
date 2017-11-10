@@ -45,7 +45,8 @@ public abstract class AbstractMealController {
     }
 
     public void update(Meal meal) {
-
+        log.info("update {}", meal);
+        mealService.update(meal, AuthorizedUser.id());
     }
 
     public List<MealWithExceed> getBetween(LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
