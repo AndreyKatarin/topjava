@@ -6,6 +6,7 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -16,12 +17,12 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal create(Meal meal, int userId) {
-        return null;
+        return repository.save(meal, userId);
     }
 
     @Override
     public Meal get(int id, int userId) throws NotFoundException {
-        return null;
+        return repository.get(id, userId);
     }
 
     @Override
@@ -30,12 +31,12 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public void delete(int id) throws NotFoundException {
-
+    public void delete(int id, int userId) throws NotFoundException {
+        repository.delete(id, userId);
     }
 
     @Override
-    public List<Meal> getAll(int userId) {
-        return null;
+    public Collection<Meal> getAll(int userId) {
+        return repository.getAll(userId);
     }
 }
