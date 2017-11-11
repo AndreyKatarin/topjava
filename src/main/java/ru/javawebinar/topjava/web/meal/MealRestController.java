@@ -25,8 +25,8 @@ public class MealRestController extends AbstractMealController {
     }
 
     @Override
-    public void delete(int id) {
-        super.delete(id);
+    public boolean delete(int id) {
+        return super.delete(id);
     }
 
     @Override

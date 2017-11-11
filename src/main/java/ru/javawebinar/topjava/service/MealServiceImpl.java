@@ -35,8 +35,8 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public void delete(int id, int userId) throws NotFoundException {
-        repository.delete(id, userId);
+    public boolean delete(int id, int userId) throws NotFoundException {
+        return repository.delete(id, userId);
     }
 
     @Override

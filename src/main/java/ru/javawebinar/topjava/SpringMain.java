@@ -16,8 +16,10 @@ public class SpringMain {
         // java 7 Automatic resource management
         try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml")) {
             System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
+
             AdminRestController adminUserController = appCtx.getBean(AdminRestController.class);
-            //adminUserController.create(new User(null, "userName", "email", "password", Role.ROLE_ADMIN));
+
+            adminUserController.create(new User(null, "userName", "email", "password", Role.ROLE_ADMIN));
 
             System.out.println("//================ USERS ORDER BY NAME =================//");
             System.out.println(adminUserController.getAll());
@@ -32,7 +34,7 @@ public class SpringMain {
             mealRestController.update(new Meal(7, LocalDateTime.now(), "Some new meal - updated", 900));
             System.out.println(mealRestController.getAll());
             System.out.println("//================DELETE MEAL=================//");
-            mealRestController.delete(7);
+            System.out.println(mealRestController.delete(7));
             System.out.println(mealRestController.getAll());
         }
     }

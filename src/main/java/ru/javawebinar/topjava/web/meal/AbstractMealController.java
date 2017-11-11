@@ -39,9 +39,9 @@ public abstract class AbstractMealController {
         return mealService.create(meal, AuthorizedUser.id());
     }
 
-    public void delete(int id) {
+    public boolean delete(int id) {
         log.info("delete {}", id);
-        mealService.delete(id, AuthorizedUser.id());
+        return mealService.delete(id, AuthorizedUser.id());
     }
 
     public void update(Meal meal) {

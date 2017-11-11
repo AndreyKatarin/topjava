@@ -16,7 +16,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
-        MealsUtil.MEALS.forEach(m -> save(m, 1));
+        MealsUtil.MEALS.forEach(m -> this.save(m, 1));
     }
 
     @Override
@@ -33,9 +33,9 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public void delete(int id, int userId) {
+    public boolean delete(int id, int userId) {
         Map<Integer, Meal> map = repository.get(userId);
-        map.keySet().removeIf(k -> k == id);
+        return map.keySet().removeIf(k -> k == id);
     }
 
     @Override

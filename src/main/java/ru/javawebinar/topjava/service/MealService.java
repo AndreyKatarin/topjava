@@ -11,6 +11,6 @@ public interface MealService {
     Meal create(Meal meal, int userId);
     Meal get(int id, int userId) throws NotFoundException;
     void update(Meal meal, int userId)throws NotFoundException;
-    void delete(int id, int userId) throws NotFoundException;
+    boolean delete(int id, int userId) throws NotFoundException;
     Collection<Meal> getAll(int userId);
 }
