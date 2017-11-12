@@ -23,9 +23,9 @@ public abstract class AbstractMealController {
     @Autowired
     private MealService mealService;
 
-    public Collection<Meal> getAll() {
+    public List<MealWithExceed> getAll() {
         log.info("getAll");
-        return mealService.getAll(AuthorizedUser.id());
+        return MealsUtil.getWithExceeded(mealService.getAll(AuthorizedUser.id()), MealsUtil.DEFAULT_CALORIES_PER_DAY);
     }
 
     public Meal get(int id) {
