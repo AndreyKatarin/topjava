@@ -24,8 +24,8 @@
     <hr/>
     <form method="get" action="meals?action=filter">
 
-            Date - From: <input name="date-from" type="date" > To: <input name="date-to" type="date"><br><br>
-            Time - From: <input name="time-from" type="time"> To: <input name="time-to" type="time"><br>
+            Date - From: <input name="startDate" type="date" > To: <input name="endDate" type="date"><br><br>
+            Time - From: <input name="startTime" type="time"> To: <input name="endTime" type="time"><br>
 
             <input type="submit" value="filter">
 

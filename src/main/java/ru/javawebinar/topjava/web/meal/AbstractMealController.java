@@ -10,8 +10,11 @@ import ru.javawebinar.topjava.to.MealWithExceed;
 import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.util.UsersUtil;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
@@ -51,5 +54,9 @@ public abstract class AbstractMealController {
 
     public List<MealWithExceed> getBetween(LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         return MealsUtil.getFilteredWithExceeded(mealService.getAll(AuthorizedUser.id()), startTime, endTime, caloriesPerDay);
+    }
+
+    public List<MealWithExceed> getBetween(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+        return Collections.EMPTY_LIST;
     }
 }
