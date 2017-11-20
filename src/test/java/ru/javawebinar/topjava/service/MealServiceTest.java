@@ -12,6 +12,7 @@ import ru.javawebinar.topjava.model.Meal;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
 
 import static ru.javawebinar.topjava.MealTestData.*;
@@ -46,14 +47,25 @@ public class MealServiceTest {
 
     @Test
     public void getBetweenDates() throws Exception {
-        assertMatch(service.getBetweenDates(
-                LocalDate.of(2015, Month.MAY, 30), LocalDate.of(2015, Month.MAY, 30), USER_ID),
-                MEAL_2, MEAL_1, MEAL_0);
+        assertMatch(
+                service.getBetweenDates(
+                        LocalDate.of(2015, Month.MAY, 30),
+                        LocalDate.of(2015, Month.MAY, 30), USER_ID
+                ),
+                MEAL_2, MEAL_1, MEAL_0
+        );
     }
 
     @Test
     public void getBetweenDateTimes() throws Exception {
-
+        assertMatch(
+                service.getBetweenDateTimes(
+                        LocalDateTime.of(LocalDate.of(2015, Month.MAY, 30), LocalTime.of(12, 0)),
+                        LocalDateTime.of(LocalDate.of(2015, Month.MAY, 30), LocalTime.of(19, 0)),
+                        USER_ID
+                ),
+                MEAL_1
+        );
     }
 
     @Test
