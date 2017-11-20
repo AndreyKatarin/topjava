@@ -10,6 +10,8 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.javawebinar.topjava.model.Meal;
 
+import java.time.LocalDateTime;
+
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
@@ -64,6 +66,8 @@ public class MealServiceTest {
 
     @Test
     public void create() throws Exception {
-
+        final Meal MEAL_CREATED = new Meal(null, LocalDateTime.now(), "Ужин после 6....", 2000);
+        service.create(MEAL_CREATED, USER_ID);
+        assertMatch(service.getAll(USER_ID), MEAL_0, MEAL_1, MEAL_2, MEAL_3, MEAL_4, MEAL_5, MEAL_CREATED);
     }
 }
