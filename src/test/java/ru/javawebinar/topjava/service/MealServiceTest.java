@@ -11,9 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Meal;
 
-import static ru.javawebinar.topjava.MealTestData.MEAL;
-import static ru.javawebinar.topjava.MealTestData.MEAL_ID;
-import static ru.javawebinar.topjava.MealTestData.assertMatch;
+import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 @ContextConfiguration({
@@ -54,7 +52,7 @@ public class MealServiceTest {
 
     @Test
     public void getAll() throws Exception {
-
+        assertMatch(service.getAll(USER_ID), MEAL, MEAL1, MEAL2, MEAL3, MEAL4, MEAL5);
     }
 
     @Test
