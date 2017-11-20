@@ -10,7 +10,9 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.javawebinar.topjava.model.Meal;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
@@ -44,7 +46,9 @@ public class MealServiceTest {
 
     @Test
     public void getBetweenDates() throws Exception {
-
+        assertMatch(service.getBetweenDates(
+                LocalDate.of(2015, Month.MAY, 30), LocalDate.of(2015, Month.MAY, 30), USER_ID),
+                MEAL_2, MEAL_1, MEAL_0);
     }
 
     @Test
