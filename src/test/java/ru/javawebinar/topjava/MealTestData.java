@@ -25,7 +25,7 @@ public class MealTestData {
     public static final Meal MEAL_5 = new Meal(MEAL_ID + 5, LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510);
     public static final Meal MEAL_ADMIN_1= new Meal(MEAL_ID + 6, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500);
     public static final Meal MEAL_ADMIN_2 = new Meal(MEAL_ID + 7, LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000);
-    public static final Meal MEAL_ADMIN_3 = new Meal(MEAL_ID + 7, LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 300);
+    public static final Meal MEAL_ADMIN_3 = new Meal(MEAL_ID + 8, LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 300);
 
     public static void assertMatch(Meal actual, Meal expected) {
         assertThat(actual).isEqualToIgnoringGivenFields(expected);
