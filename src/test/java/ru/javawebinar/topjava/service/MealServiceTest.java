@@ -8,7 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Meal;
 
 import static ru.javawebinar.topjava.MealTestData.*;
@@ -32,12 +31,13 @@ public class MealServiceTest {
     @Test
     public void get() throws Exception {
         Meal meal = service.get(MEAL_ID, USER_ID);
-        assertMatch(meal, MEAL);
+        assertMatch(meal, MEAL_0);
     }
 
     @Test
     public void delete() throws Exception {
-
+        service.delete(MEAL_ID, USER_ID);
+        assertMatch(service.getAll(USER_ID), MEAL_1, MEAL_2, MEAL_3, MEAL_4, MEAL_5);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class MealServiceTest {
 
     @Test
     public void getAll() throws Exception {
-        assertMatch(service.getAll(USER_ID), MEAL, MEAL1, MEAL2, MEAL3, MEAL4, MEAL5);
+        assertMatch(service.getAll(USER_ID), MEAL_0, MEAL_1, MEAL_2, MEAL_3, MEAL_4, MEAL_5);
     }
 
     @Test
