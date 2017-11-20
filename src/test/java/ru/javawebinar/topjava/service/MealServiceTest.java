@@ -52,6 +52,11 @@ public class MealServiceTest {
         assertMatch(service.getAll(USER_ID), MEAL_1, MEAL_2, MEAL_3, MEAL_4, MEAL_5);
     }
 
+    @Test(expected = NotFoundException.class)
+    public void notFoundDelete() throws Exception {
+        service.delete(MEAL_ID, ADMIN_ID);
+    }
+
     @Test
     public void getBetweenDates() throws Exception {
         assertMatch(
