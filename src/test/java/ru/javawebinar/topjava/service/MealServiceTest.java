@@ -57,7 +57,9 @@ public class MealServiceTest {
 
     @Test
     public void update() throws Exception {
-
+        final Meal MEAL_1_UPDATED = new Meal(MEAL_1.getId(), MEAL_1.getDateTime(), "Завтрак-updated", 5000);
+        service.update(MEAL_1_UPDATED, USER_ID);
+        assertMatch(service.get(MEAL_1.getId(), USER_ID), MEAL_1_UPDATED);
     }
 
     @Test
