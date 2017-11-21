@@ -1,7 +1,6 @@
 package ru.javawebinar.topjava;
 
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.model.User;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -9,11 +8,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
-import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
 
-/**
- * Created by DimaZhukov on 20.11.2017.
- */
 public class MealTestData {
     public static final int MEAL_ID = ADMIN_ID + 1;
 
@@ -28,10 +23,10 @@ public class MealTestData {
     public static final Meal MEAL_ADMIN_3 = new Meal(MEAL_ID + 8, LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 300);
 
     public static void assertMatch(Meal actual, Meal expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected);
+        assertThat(actual).isEqualToComparingFieldByField(expected);
     }
 
     public static void assertMatch(Iterable<Meal> actual, Meal... expected) {
-        assertThat(actual).isEqualTo(Arrays.asList(expected));
+        assertThat(actual).usingDefaultElementComparator().isEqualTo(Arrays.asList(expected));
     }
 }
