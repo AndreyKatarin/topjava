@@ -1,7 +1,8 @@
 package ru.javawebinar.topjava.service;
 
-/**
- * Created by Dima on 04.12.2017.
- */
-public class DataJpaMealServiceTest {
+import org.springframework.test.context.ActiveProfiles;
+import ru.javawebinar.topjava.Profiles;
+
+@ActiveProfiles(profiles = {Profiles.DATAJPA, Profiles.POSTGRES_DB})
+public class DataJpaMealServiceTest extends MealServiceTest {
 }
