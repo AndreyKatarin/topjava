@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Meal;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -24,4 +25,8 @@ public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
     @Transactional
     @Query("SELECT m FROM Meal m WHERE m.id=:id AND m.user.id=:userId")
     Meal get(@Param("id") int id, @Param("userId") int userId);
+
+    @Transactional
+    @Query(name = Meal.GET_BETWEEN)
+    List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
 }
