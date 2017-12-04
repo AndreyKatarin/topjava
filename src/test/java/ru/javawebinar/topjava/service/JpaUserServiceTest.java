@@ -1,7 +1,9 @@
 package ru.javawebinar.topjava.service;
 
-/**
- * Created by Dima on 04.12.2017.
- */
-public class JpaUserServiceTest {
+import org.springframework.test.context.ActiveProfiles;
+import ru.javawebinar.topjava.Profiles;
+
+
+@ActiveProfiles(profiles = {Profiles.JPA, Profiles.POSTGRES_DB})
+public class JpaUserServiceTest extends UserServiceTest{
 }

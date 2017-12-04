@@ -1,7 +1,8 @@
 package ru.javawebinar.topjava.service;
 
-/**
- * Created by Dima on 04.12.2017.
- */
-public class JdbcUserServiceTest {
+import org.springframework.test.context.ActiveProfiles;
+import ru.javawebinar.topjava.Profiles;
+
+@ActiveProfiles(profiles = {Profiles.JDBC, Profiles.POSTGRES_DB})
+public class JdbcUserServiceTest extends UserServiceTest {
 }
