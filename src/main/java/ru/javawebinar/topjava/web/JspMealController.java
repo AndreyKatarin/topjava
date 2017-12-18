@@ -19,7 +19,6 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalDate;
 import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 
 @Controller
-@RequestMapping(value = "/meals")
 public class JspMealController extends AbstractMealController {
 
     @Autowired
@@ -33,21 +32,21 @@ public class JspMealController extends AbstractMealController {
         return "meals";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "create", method = RequestMethod.GET)
     public String showCreate(HttpServletRequest request) {
         final Meal meal = new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000);
         request.setAttribute("meal", meal);
         return "mealForm";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "update", method = RequestMethod.GET)
     public String showUpdate(HttpServletRequest request) {
         final Meal meal = super.get(getId(request));
         request.setAttribute("meal", meal);
         return "mealForm";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
     public String delete(HttpServletRequest request) {
         int id = getId(request);
         super.delete(id);
@@ -69,7 +68,7 @@ public class JspMealController extends AbstractMealController {
         return "redirect:/meals";
     }
 
-    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    @RequestMapping(value = "filter", method = RequestMethod.POST)
     public String filter(HttpServletRequest request) {
         LocalDate startDate = parseLocalDate(request.getParameter("startDate"));
         LocalDate endDate = parseLocalDate(request.getParameter("endDate"));
