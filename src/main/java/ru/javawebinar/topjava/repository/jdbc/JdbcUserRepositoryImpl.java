@@ -16,17 +16,18 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 @Transactional(readOnly = true)
 public class JdbcUserRepositoryImpl implements UserRepository {
 
     private static ResultSetExtractor<List<User>> RESULT_SET_EXTRACTOR = resultSet -> {
-        Map<String, User> map = new TreeMap<>();
+        Map<Integer, User> map = new HashMap<>();
         User user = null;
         while (resultSet.next()) {
-            String name = resultSet.getString("name");
-            user = map.get(name);
+            int id = resultSet.getInt("id");
+            user = map.get(id);
             if (user == null) {
                 user = new User();
                 user.setId(resultSet.getInt("id"));
@@ -37,14 +38,16 @@ public class JdbcUserRepositoryImpl implements UserRepository {
                 user.setEnabled(resultSet.getBoolean("enabled"));
                 user.setRoles(new HashSet<>());
                 user.setCaloriesPerDay(resultSet.getInt("calories_per_day"));
-                map.put(name, user);
+                map.put(id, user);
             }
-            Set<Role> copy = new HashSet<>(user.getRoles());
+
+            //continuation for the user to get roles
+            Set<Role> copy = new HashSet<>(user.getRoles()); // to avoid IllegalStateException thrown if user.getRoles().add()
             copy.add(Role.valueOf(resultSet.getString("role")));
             user.setRoles(copy);
         }
-
-        return new ArrayList<>(map.values());
+        //Comparator's matching sql order by
+        return map.values().stream().sorted(Comparator.comparing(User::getName).thenComparing(User::getEmail)).collect(Collectors.toList());
     };
 
     private final JdbcTemplate jdbcTemplate;
