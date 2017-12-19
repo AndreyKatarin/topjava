@@ -19,6 +19,7 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalDate;
 import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 
 @Controller
+@RequestMapping(value = "meals")
 public class JspMealController extends AbstractMealController {
 
     @Autowired
@@ -36,6 +37,7 @@ public class JspMealController extends AbstractMealController {
     public String showCreate(HttpServletRequest request) {
         final Meal meal = new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000);
         request.setAttribute("meal", meal);
+        request.setAttribute("action", "create");
         return "mealForm";
     }
 
@@ -43,6 +45,7 @@ public class JspMealController extends AbstractMealController {
     public String showUpdate(HttpServletRequest request) {
         final Meal meal = super.get(getId(request));
         request.setAttribute("meal", meal);
+        request.setAttribute("action", "update");
         return "mealForm";
     }
 

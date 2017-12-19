@@ -7,7 +7,16 @@
 <body>
 <section>
     <h3><a href="${pageContext.request.contextPath}/"><spring:message code="app.home" /></a></h3>
-    <h2>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h2>
+    <h2>
+        <c:choose>
+            <c:when test="${action == 'create'}">
+                <spring:message code="meal.create-meal"/>
+            </c:when>
+            <c:otherwise>
+                <spring:message code="meal.update-meal"/>
+            </c:otherwise>
+        </c:choose>
+    </h2>
     <hr>
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
     <form method="post" action="${pageContext.request.contextPath}/meals">
