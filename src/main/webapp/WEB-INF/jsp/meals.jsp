@@ -13,7 +13,7 @@
         <section>
             <h3><spring:message code="meal.title"/></h3>
             <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-9">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <form class="form-horizontal" id="filter">
@@ -49,7 +49,7 @@
                             <a class="btn btn-danger" type="button" onclick="clearFilter()">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
-                            <a class="btn btn-primary" type="button" onclick="updateTable()">
+                            <a class="btn btn-primary" type="button" onclick="filterTable()">
                                 <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
                             </a>
                         </div>

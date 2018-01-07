@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealWithExceed;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -35,4 +37,15 @@ public class MealAjaxController extends AbstractMealController {
             super.update(meal, id);
         }
     }
+
+    @PostMapping (value = "/getBetween", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<MealWithExceed> getBetween(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam("startTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime
+            ) {
+        return super.getBetween(startDate, startTime, endDate, endTime);
+    }
+
 }
