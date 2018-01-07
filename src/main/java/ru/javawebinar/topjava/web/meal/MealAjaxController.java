@@ -19,7 +19,7 @@ public class MealAjaxController extends AbstractMealController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@RequestParam("id") Integer id) {
+    public void delete(@PathVariable("id") Integer id) {
         super.delete(id);
     }
 

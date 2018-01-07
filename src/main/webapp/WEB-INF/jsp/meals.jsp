@@ -60,7 +60,7 @@
                         <td>${meal.description}</td>
                         <td>${meal.calories}</td>
                         <td><a href="meals/update?id=${meal.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-                        <td><a href="meals/delete?id=${meal.id}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                        <td><a onclick="deleteRow(${meal.id})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -97,7 +97,6 @@
 
                     <div class="form-group">
                         <label for="calories" class="control-label col-xs-3"><spring:message code="meal.calories"/></label>
-
                         <div class="col-xs-9">
                             <input id="calories" type="number" value="${meal.calories}" name="calories" placeholder="<spring:message code="meal.calories"/>" required>
                         </div>
